@@ -1,6 +1,6 @@
 // Enemies our player must avoid
 class Enemy {
-    constructor(x, y) {
+    constructor(x, y, speed) {
         // Variables applied to each of our instances go here,
         // we've provided one for you to get started
 
@@ -10,6 +10,7 @@ class Enemy {
         //set enemy start location
         this.x = x;
         this.y = y;
+        this.speed = speed;
         //set speed
     }
 
@@ -19,7 +20,10 @@ class Enemy {
         // You should multiply any movement by the dt parameter
         // which will ensure the game runs at the same speed for
         // all computers.
-
+        if(this.x >= 500){
+            this.x = -100;
+        }
+        this.x += (this.speed*dt);
         /* TODO:
          * 1. update Enemy location
          * 2. handle collision with the Player
@@ -101,9 +105,9 @@ class Player {
 }
 
 // Now instantiate your objects.
-const enemy1 = new Enemy(0,65);
-const enemy2 = new Enemy(100,145);
-const enemy3 = new Enemy(200,230);
+const enemy1 = new Enemy(0,65, 50);
+const enemy2 = new Enemy(100,145, 100);
+const enemy3 = new Enemy(200,230, 150);
 
 // Place all enemy objects in an array called allEnemies
 let allEnemies = new Set();
