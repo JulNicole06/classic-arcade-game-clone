@@ -58,7 +58,40 @@ class Player {
     //receive user input, allowedKeys, and move player
     handleInput(allowedKeys) {
         //ensure that player cannot move off-screen
-
+        const xPositions = [0, 100, 200, 300, 400];
+        const yPositions = [400, 320, 240, 155, 75, -10];
+        let yidx, xidx;
+        //handle key inputs
+        switch(allowedKeys) {
+            case 'up':
+                yidx = yPositions.indexOf(this.y) + 1;
+                if (yidx == 6) {
+                    yidx = 5;
+                }
+                this.y = yPositions[yidx];
+                break;
+            case 'down':
+                yidx = yPositions.indexOf(this.y) - 1;
+                if (yidx < 0) {
+                    yidx = 0;
+                }
+                this.y = yPositions[yidx];
+                break;
+            case 'left':
+                xidx = xPositions.indexOf(this.x) - 1;
+                if (xidx < 0) {
+                    xidx = 0;
+                }
+                this.x = xPositions[xidx];
+                break;
+            case 'right':
+                xidx = xPositions.indexOf(this.x) + 1;
+                if (xidx == 5) {
+                    xidx = 4;
+                }
+                this.x = xPositions[xidx];
+                break;
+        }
     }
 
     //reset game when player reaches the water
@@ -79,7 +112,7 @@ allEnemies.add(enemy2);
 allEnemies.add(enemy3);
 
 // Place the player object in a variable called player
-const player = new Player(200, 440);
+const player = new Player(200, 400);
 
 
 // This listens for key presses and sends the keys to your
