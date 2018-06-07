@@ -24,10 +24,9 @@ class Enemy {
             this.x = -100;
         }
         this.x += (this.speed*dt);
-        /* TODO:
-         * 1. update Enemy location
-         * 2. handle collision with the Player
-         */
+
+        //handle collision with the Player
+
     }
 
     // Draw the enemy on the screen, required method for game
@@ -69,8 +68,12 @@ class Player {
         switch(allowedKeys) {
             case 'up':
                 yidx = yPositions.indexOf(this.y) + 1;
-                if (yidx == 6) {
-                    yidx = 5;
+                if (yidx == 5) {
+                    this.y = yPositions[yidx];
+                    setTimeout(function(){
+                        player.resetPlayer();
+                    }, 500);
+                    break;
                 }
                 this.y = yPositions[yidx];
                 break;
@@ -100,12 +103,13 @@ class Player {
 
     //reset game when player reaches the water
     resetPlayer() {
-
+        this.x = 200;
+        this.y = 400;
     }
 }
 
 // Now instantiate your objects.
-const enemy1 = new Enemy(0,65, 50);
+const enemy1 = new Enemy(0, 65, 50);
 const enemy2 = new Enemy(100,145, 100);
 const enemy3 = new Enemy(200,230, 150);
 
