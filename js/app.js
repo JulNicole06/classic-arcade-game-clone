@@ -6,6 +6,11 @@ var Enemy = function() {
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
+
+    /* TODO:
+     * 1. set Enemy initial location
+     * 2. set Enemy speed
+     */
 };
 
 // Update the enemy's position, required method for game
@@ -14,6 +19,11 @@ Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
+
+    /* TODO:
+     * 1. update Enemy location
+     * 2. handle collision with the Player
+     */
 };
 
 // Draw the enemy on the screen, required method for game
@@ -24,6 +34,15 @@ Enemy.prototype.render = function() {
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
+
+/* TODO
+ * 1. instantiate Player with image and initial location
+ * 2. update method: update Player location and handle collision with Enemy
+ * 3. render method: use the same as the enemy render method
+ * 4. handleInput method: receive user input, allowedKeys and move player
+ * 5. ensure that player cannot move off-screen
+ * 6. resetPlayer method: reset game when player reaches the water
+ */
 
 
 // Now instantiate your objects.
