@@ -1,15 +1,21 @@
-frontend-nanodegree-arcade-game
-===============================
+## Frogger Game Clone
+---
+This is a project submission for Udacity's class on Object Oriented Javascript, which is part of the Front-End Web Development Nanodegree.
 
-Students should use this [rubric](https://review.udacity.com/#!/projects/2696458597/rubric) for self-checking their submission. Make sure the functions you write are **object-oriented** - either class functions (like Player and Enemy) or class prototype functions such as Enemy.prototype.checkCollisions, and that the keyword 'this' is used appropriately within your class and class prototype functions to refer to the object the function is called upon. Also be sure that the **readme.md** file is updated with your instructions on both how to 1. Run and 2. Play your arcade game.
 
-For detailed instructions on how to get started, check out this [guide](https://docs.google.com/document/d/1v01aScPjSWCCWQLIpFqvg3-vXLH2e8_SZQKC8jNO0Dc/pub?embedded=true).
+### Loading the Game:
 
-/* TODO:
- * 1. add instructions on how to load game
- * 2. add instructions on how to play game
- */
+To play the game in your browser, click [here](https://julnicole06.github.io/classic-arcade-game-clone/).  The goal of this game is to reach the water, without colliding into any of the bugs.
 
-Image Attribution:
+### How to Play:
 
-1. High five icon created by Nick Abrams from Noun Project
+- Move the player using the up, down, left, right arrow keys on your keyboard
+- If your player collides with a bug, they get reset to the starting mark
+- You win once the player reaches the water
+
+
+### Resources:
+- Starter code was provided by Udacity and available [here](https://github.com/udacity/frontend-nanodegree-arcade-game).
+- Instructions on project requirments can be found [here](https://docs.google.com/document/d/1v01aScPjSWCCWQLIpFqvg3-vXLH2e8_SZQKC8jNO0Dc/pub?embedded=true).
+- This submission was graded accounding to [this rubric](https://review.udacity.com/#!/projects/2696458597/rubric).
+- ˝High five icon created by Nick Abrams from Noun Project
