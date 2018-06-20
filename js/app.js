@@ -1,3 +1,5 @@
+"use strict";
+
 // Enemies our player must avoid
 class Enemy {
     constructor(x, y, speed) {
@@ -26,7 +28,13 @@ class Enemy {
         this.x += (this.speed*dt);
 
         //handle collision with the Player
-
+        let enemyRight = this.x + 101;
+        let enemyLeft = this.x;
+        let playerLeft = player.x;
+        let playerRight = player.x + 101;
+        if(enemyRight >= playerLeft & enemyLeft <= playerRight & this.y == player.y){
+            player.resetPlayer();
+        }
     }
 
     // Draw the enemy on the screen, required method for game
@@ -58,70 +66,65 @@ class Player {
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
     }
 
-    //receive user input, allowedKeys, and move player
+    //receive user input (allowedKeys), and move player
     handleInput(allowedKeys) {
         //ensure that player cannot move off-screen
-        const xPositions = [0, 100, 200, 300, 400];
-        const yPositions = [400, 320, 240, 155, 75, -10];
-        let yidx, xidx;
+        const border = {
+            left: 0,
+            right: 404,
+            top: -10,
+            bottom: 405
+        }
+
+        const yIncrement = (border.bottom - border.top) / 5;
+        const xIncrement = (border.right - border.left) / 4;
+
         //handle key inputs
         switch(allowedKeys) {
             case 'up':
-                yidx = yPositions.indexOf(this.y) + 1;
-                if (yidx == 5) {
-                    this.y = yPositions[yidx];
+                this.y -= yIncrement;
+                if (this.y == border.top) {
                     setTimeout(function(){
                         player.resetPlayer();
                     }, 500);
                     break;
                 }
-                this.y = yPositions[yidx];
                 break;
             case 'down':
-                yidx = yPositions.indexOf(this.y) - 1;
-                if (yidx < 0) {
-                    yidx = 0;
+                if (this.y == border.bottom) {
+                    break;
                 }
-                this.y = yPositions[yidx];
+                this.y += yIncrement;
                 break;
             case 'left':
-                xidx = xPositions.indexOf(this.x) - 1;
-                if (xidx < 0) {
-                    xidx = 0;
+                if (this.x == border.left) {
+                    break;
                 }
-                this.x = xPositions[xidx];
+                this.x -= xIncrement;
                 break;
             case 'right':
-                xidx = xPositions.indexOf(this.x) + 1;
-                if (xidx == 5) {
-                    xidx = 4;
+                if (this.x == border.right) {
+                    break;
                 }
-                this.x = xPositions[xidx];
+                this.x += xIncrement;
                 break;
         }
     }
 
     //reset game when player reaches the water
     resetPlayer() {
-        this.x = 200;
-        this.y = 400;
+        this.x = 202;
+        this.y = 405;
     }
 }
 
-// Now instantiate your objects.
-const enemy1 = new Enemy(0, 65, 50);
-const enemy2 = new Enemy(100,145, 100);
-const enemy3 = new Enemy(200,230, 150);
-
-// Place all enemy objects in an array called allEnemies
-let allEnemies = new Set();
-allEnemies.add(enemy1);
-allEnemies.add(enemy2);
-allEnemies.add(enemy3);
+// Now instantiate your objects and place all enemy objects in an array called allEnemies
+let allEnemies = [new Enemy(0, 73, 50),
+    new Enemy(101, 156, 100),
+    new Enemy(202, 239, 150)];
 
 // Place the player object in a variable called player
-const player = new Player(200, 400);
-
+const player = new Player(202, 405);
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
