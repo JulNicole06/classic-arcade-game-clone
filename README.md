@@ -9,3 +9,7 @@ For detailed instructions on how to get started, check out this [guide](https://
  * 1. add instructions on how to load game
  * 2. add instructions on how to play game
  */
+
+Image Attribution:
+
+1. High five icon created by Nick Abrams from Noun Project

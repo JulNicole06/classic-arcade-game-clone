@@ -1,5 +1,10 @@
 "use strict";
 
+// Global variables
+let active = true;
+const congrats = document.querySelector("#congrats-modal");
+const restartButton = document.querySelector("#restart-button");
+
 // Enemies our player must avoid
 class Enemy {
     constructor(x, y, speed) {
@@ -84,9 +89,7 @@ class Player {
             case 'up':
                 this.y -= yIncrement;
                 if (this.y == border.top) {
-                    setTimeout(function(){
-                        player.resetPlayer();
-                    }, 500);
+                    player.winGame();
                     break;
                 }
                 break;
@@ -111,10 +114,18 @@ class Player {
         }
     }
 
+    winGame() {
+        restartButton.addEventListener("click", player.resetPlayer);
+        active = false;
+        congrats.style.visibility = 'visible';
+    }
+
     //reset game when player reaches the water
     resetPlayer() {
-        this.x = 202;
-        this.y = 405;
+        active = true;
+        congrats.style.visibility = 'hidden';
+        player.x = 202;
+        player.y = 405;
     }
 }
 
@@ -129,12 +140,14 @@ const player = new Player(202, 405);
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
 document.addEventListener('keyup', function(e) {
-    var allowedKeys = {
-        37: 'left',
-        38: 'up',
-        39: 'right',
-        40: 'down'
-    };
+    if(active){
+        var allowedKeys = {
+            37: 'left',
+            38: 'up',
+            39: 'right',
+            40: 'down'
+        };
 
-    player.handleInput(allowedKeys[e.keyCode]);
+        player.handleInput(allowedKeys[e.keyCode])
+    };
 });

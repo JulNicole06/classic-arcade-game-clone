@@ -1,3 +1,38 @@
 body {
     text-align: center;
 }
+
+#congrats-modal {
+	background-color: #fff;
+	border-radius: 10px;
+	box-shadow: 3px 3px 3px black;
+	display: flex;
+	flex-flow: column wrap;
+	height: 300px;
+	justify-content: center;
+	margin-left: calc((100% - 515px) / 2);
+	margin-top: 130px;
+	position: fixed;
+	text-align: center;
+	width: 500px;
+	visibility: hidden;
+}
+
+#highfive {
+	height: 100%;
+	margin: auto;
+}
+
+#modal-content {
+	height: 100%;
+}
+
+#congrats-message {
+	font-size: 25px;
+	margin: 100px auto 25px auto;
+}
+
+#restart-button {
+	height: 50px;
+	width: 100px;
+}
