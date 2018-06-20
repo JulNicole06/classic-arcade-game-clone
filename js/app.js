@@ -33,10 +33,11 @@ class Enemy {
         this.x += (this.speed*dt);
 
         //handle collision with the Player
-        let enemyRight = this.x + 101;
-        let enemyLeft = this.x;
-        let playerLeft = player.x;
-        let playerRight = player.x + 101;
+        // width of box is 101, padding between player and box is approx 15
+        let enemyRight = this.x + 101 - 15;
+        let enemyLeft = this.x + 15;
+        let playerLeft = player.x + 15;
+        let playerRight = player.x + 101 - 15;
         if(enemyRight >= playerLeft & enemyLeft <= playerRight & this.y == player.y){
             player.resetPlayer();
         }

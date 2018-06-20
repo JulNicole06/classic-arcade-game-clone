@@ -4,8 +4,8 @@ body {
 
 #congrats-modal {
 	background-color: #fff;
+	border: 2px solid black;
 	border-radius: 10px;
-	box-shadow: 3px 3px 3px black;
 	display: flex;
 	flex-flow: column wrap;
 	height: 300px;
