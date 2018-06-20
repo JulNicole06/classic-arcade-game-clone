@@ -1,39 +1,38 @@
 "use strict";
 
-// Global variables
+// global variables
 let active = true;
 const congrats = document.querySelector("#congrats-modal");
 const restartButton = document.querySelector("#restart-button");
 
-// Enemies our player must avoid
+// enemies our player must avoid
 class Enemy {
     constructor(x, y, speed) {
-        // Variables applied to each of our instances go here,
-        // we've provided one for you to get started
-
-        // The image/sprite for our enemies, this uses
-        // a helper we've provided to easily load images
+        // the image/sprite for the enemies, this uses
+        // a helper provided to easily load images
         this.sprite = "images/enemy-bug.png";
-        //set enemy start location
+
+        //set enemy start location and speed
         this.x = x;
         this.y = y;
         this.speed = speed;
-        //set speed
     }
 
-    // Update the enemy's position, required method for game
-    // Parameter: dt, a time delta between ticks
+    // update the enemy's position
+    // parameter: dt, a time delta between ticks
     update(dt) {
-        // You should multiply any movement by the dt parameter
-        // which will ensure the game runs at the same speed for
-        // all computers.
+        // have enemy restart at the left side of the play area after
+        // moving across the screen
         if(this.x >= 500){
             this.x = -100;
         }
+
+        // to ensure the game runs at the same speed for all computers
+        // multiply any movement by the dt parameter
         this.x += (this.speed*dt);
 
-        //handle collision with the Player
-        // width of box is 101, padding between player and box is approx 15
+        // set parameters for collision between player and enemy
+        // width of box is 101px, space between player and box is approx 15px
         let enemyRight = this.x + 101 - 15;
         let enemyLeft = this.x + 15;
         let playerLeft = player.x + 15;
@@ -43,7 +42,7 @@ class Enemy {
         }
     }
 
-    // Draw the enemy on the screen, required method for game
+    // Draw the enemy on the screen
     render() {
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
     }
@@ -51,39 +50,43 @@ class Enemy {
 };
 
 
-// Now write your own player class
-// This class requires an update(), render() and
-// a handleInput() method.
+// main player class
 class Player {
-    //instantiate Player with image and initial location
     constructor(x, y) {
+        // the image/sprite for the player, this uses
+        // a helper provided to easily load images
         this.sprite = 'images/char-cat-girl.png';
+
+        // set player starting position
         this.x = x;
         this.y = y;
     }
 
-    //use the same as the enemy render method
+    // same as the enemy render method
     render() {
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
     }
 
-    //receive user input (allowedKeys), and move player
+    // receive user input (allowedKeys), and move player
     handleInput(allowedKeys) {
-        //ensure that player cannot move off-screen
+        // ensure that player cannot move off-screen
         const border = {
             left: 0,
             right: 404,
             top: -10,
             bottom: 405
-        }
+        };
 
+        // increment player up/down based on height/width of each box
         const yIncrement = (border.bottom - border.top) / 5;
         const xIncrement = (border.right - border.left) / 4;
 
-        //handle key inputs
+        // handle key inputs
         switch(allowedKeys) {
             case 'up':
                 this.y -= yIncrement;
+
+                // when player reaches the water, show popup
                 if (this.y == border.top) {
                     player.winGame();
                     break;
@@ -110,13 +113,18 @@ class Player {
         }
     }
 
+    // congrats modal popup when player reaches water
     winGame() {
         restartButton.addEventListener("click", player.resetPlayer);
+
+        // prevent player from being able to move
+        // while pop up is visible
         active = false;
         congrats.style.visibility = 'visible';
     }
 
-    //reset game when player reaches the water
+    // reset game player to start position,
+    // hide congrats pop up and allow player movement
     resetPlayer() {
         active = true;
         congrats.style.visibility = 'hidden';
@@ -125,19 +133,17 @@ class Player {
     }
 }
 
-// Now instantiate your objects and place all enemy objects in an array called allEnemies
+// instantiate player and allEnemies array
 let allEnemies = [new Enemy(0, 73, 50),
     new Enemy(101, 156, 100),
     new Enemy(202, 239, 150)];
 
-// Place the player object in a variable called player
 const player = new Player(202, 405);
 
-// This listens for key presses and sends the keys to your
-// Player.handleInput() method. You don't need to modify this.
+// listen for key presses and send the keys to player.handleInput() method
 document.addEventListener('keyup', function(e) {
     if(active){
-        var allowedKeys = {
+        const allowedKeys = {
             37: 'left',
             38: 'up',
             39: 'right',
