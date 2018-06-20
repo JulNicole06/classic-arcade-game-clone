@@ -62,11 +62,6 @@ class Player {
         this.y = y;
     }
 
-    //update Player location and handle collision with Enemy
-    update() {
-
-    }
-
     //use the same as the enemy render method
     render() {
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
