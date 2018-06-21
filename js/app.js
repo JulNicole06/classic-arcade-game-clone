@@ -33,11 +33,11 @@ class Enemy {
 
         // set parameters for collision between player and enemy
         // width of box is 101px, space between player and box is approx 15px
-        let enemyRight = this.x + 101 - 15;
-        let enemyLeft = this.x + 15;
-        let playerLeft = player.x + 15;
-        let playerRight = player.x + 101 - 15;
-        if(enemyRight >= playerLeft & enemyLeft <= playerRight & this.y == player.y){
+        const enemyRight = this.x + 101 - 15;
+        const enemyLeft = this.x + 15;
+        const playerLeft = player.x + 15;
+        const playerRight = player.x + 101 - 15;
+        if(enemyRight >= playerLeft && enemyLeft <= playerRight && this.y == player.y){
             player.resetPlayer();
         }
     }
@@ -46,8 +46,7 @@ class Enemy {
     render() {
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
     }
-
-};
+}
 
 
 // main player class
@@ -134,7 +133,7 @@ class Player {
 }
 
 // instantiate player and allEnemies array
-let allEnemies = [new Enemy(0, 73, 50),
+const allEnemies = [new Enemy(0, 73, 50),
     new Enemy(101, 156, 100),
     new Enemy(202, 239, 150)];
 
